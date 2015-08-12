@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+ruby '2.1.4'
 
 gem 'rails', '4.2.1'
 
@@ -51,4 +51,4 @@ end
     gem 'pg'
     gem 'rails_12factor'
   end
-
+end
