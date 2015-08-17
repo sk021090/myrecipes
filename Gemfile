@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.4'
+ruby '2.2.1'
 
 gem 'rails', '4.2.1'
 
@@ -46,9 +46,11 @@ group :development, :test do
   group :development, :test do
     gem 'sqlite3'
     gem 'pry'
-end
+
   group :production do
     gem 'pg'
     gem 'rails_12factor'
   end
+end
+
 end
