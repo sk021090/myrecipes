@@ -1,12 +1,21 @@
 require 'test_helper'
 
 class ReecipeTest < ActiveSupport::TestCase
+  
   def setup
-      @reecipe = Reecipe.new(name: "chicken", summary: "this is good checken", description: "do what ever u like to make ur chicken")
+    @chef = Chef.create(chefname: "bob", email: "bob@example.com")
+      @reecipe = @chef.reecipes.build(name: "chicken", summary: "this is good checken", description: "do what ever u like to make ur chicken")
   end
- test "reecipe should be valid" do
+    test "reecipe should be valid" do
      assert @reecipe.valid?
     end 
+    
+    test "chef_id should be present" do
+      @reecipe.chef_id = nil
+      assert_not @reecipe.valid?
+    end
+  
+    
     test "name should be present" do
       @reecipe.name = " "
       assert_not @reecipe.valid?
@@ -54,4 +63,5 @@ class ReecipeTest < ActiveSupport::TestCase
        @reecipe.description = "a" * 19
       assert_not @reecipe.valid?
     end
+    
 end 
