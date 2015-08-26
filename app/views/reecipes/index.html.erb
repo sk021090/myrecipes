@@ -1,0 +1,22 @@
+<h1>my first reecipes</h1>
+<hr/>
+<% @reecipes.each do |reecipe| %>
+<div class="row">
+    <div class="col-md-2">
+        <section class="chef_info center">
+             <%= gravatar_for reecipe.chef, size: 100 %>
+            <h5>Chef name: <%= reecipe.chef.chefname %></h5>
+           
+            
+</section>
+</div>
+<div class="col-lg-8 well">
+  <h4><%= link_to reecipe.name, ""%></h4>
+  <p><%= reecipe.summary %></p>
+  <p>
+      <span class='quiet'><small><%= time_ago_in_words(reecipe.created_at) %>ago</small></span>
+      </p>
+</div>
+<hr/>
+</div>
+<% end %> 
