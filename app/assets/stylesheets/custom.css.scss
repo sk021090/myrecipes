@@ -84,3 +84,30 @@ body{
  .gravatar{
    border-radius: 10px;
  }
+ 
+ .well{
+  background-color: #red;
+}
+
+input, textarea, select, .uneditable-input{
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 15px;
+  }
+  
+  input{
+    height: auto !important;
+    
+  }
+  
+  span.picture {
+    margin-top: 10px;
+    input{
+      border: 0;
+    }
+  }
+  
+  .show_reecipe{
+    margin: 10px 10px 10px 10px;
+  }

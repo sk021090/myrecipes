@@ -1,5 +1,5 @@
-<h1>my first reecipes</h1>
-<hr/>
+<%= render 'shared/page_title',title: "All Reecipes"%>
+
 <% @reecipes.each do |reecipe| %>
 <div class="row">
     <div class="col-md-2">
@@ -10,12 +10,15 @@
             
 </section>
 </div>
-<div class="col-lg-8 well">
-  <h4><%= link_to reecipe.name, ""%></h4>
+<div class="col-lg-5 well">
+  <h4><%= link_to reecipe.name, reecipe_path(reecipe)%></h4>
   <p><%= reecipe.summary %></p>
   <p>
       <span class='quiet'><small><%= time_ago_in_words(reecipe.created_at) %>ago</small></span>
       </p>
+</div>
+<div class="col-md-4">
+    <%= image_tag(reecipe.picture.url, size: "140X150", class: "gravatar") if reecipe.picture? %>
 </div>
 <hr/>
 </div>
