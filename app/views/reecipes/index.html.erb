@@ -1,5 +1,9 @@
 <%= render 'shared/page_title',title: "All Reecipes"%>
 
+
+<%= will_paginate %>
+
+
 <% @reecipes.each do |reecipe| %>
 <div class="row">
     <div class="col-md-2">
@@ -14,8 +18,19 @@
   <h4><%= link_to reecipe.name, reecipe_path(reecipe)%></h4>
   <p><%= reecipe.summary %></p>
   <p>
-      <span class='quiet'><small><%= time_ago_in_words(reecipe.created_at) %>ago</small></span>
+      <span class='quiet'><small>created: <%= time_ago_in_words(reecipe.created_at) %>ago,</small></span>
+      <span class='quiet'><small>updated: <%= time_ago_in_words(reecipe.updated_at) %>ago</small></span>
       </p>
+      <div class="pull-right">
+                <%= link_to like_reecipe_path(reecipe, like: true), method: :post do %>
+                <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp <%= reecipe.thumbs_up_total %>
+                <% end %> &nbsp&nbsp&nbsp&nbsp
+                <%= link_to like_reecipe_path(reecipe, like: false), method: :post do %>
+                <i class="glyphicon glyphicon-thumbs-down"></i>&nbsp <%= reecipe.thumbs_down_total %>
+                <% end %>&nbsp&nbsp&nbsp&nbsp
+                
+            </div>
+            
 </div>
 <div class="col-md-4">
     <%= image_tag(reecipe.picture.url, size: "140X150", class: "gravatar") if reecipe.picture? %>
@@ -23,3 +38,4 @@
 <hr/>
 </div>
 <% end %> 
+<%= will_paginate %>

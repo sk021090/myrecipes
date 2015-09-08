@@ -1,7 +1,7 @@
 class ReecipesController < ApplicationController
    
   def index
-    @reecipes = Reecipe.all
+    @reecipes = Reecipe.paginate(page: params[:page], per_page: 4 )
   end
   
   def show
@@ -14,14 +14,16 @@ class ReecipesController < ApplicationController
   
   def create 
          @reecipe = Reecipe.new(reecipe_params)
-         @reecipe.chef = Chef.find(4)
+         @reecipe.chef = Chef.find(2)
+         
    if @reecipe.save
-     flash[:success] = "your reecipe was created successfully"
+     flash[:success] = "your reecipe was created successfully!"
      redirect_to reecipes_path
    else
      render :new
    end 
   end
+
     def edit
       @reecipe = Reecipe.find(params[:id])
     end
@@ -35,9 +37,25 @@ class ReecipesController < ApplicationController
         render :edit
       end 
     end 
-       private
+
+      def like
+        @reecipe = Reecipe.find(params[:id])
+       Like.create(like: params[:like], chef: Chef.first, reecipe: @reecipe)
+       if like.valid?
+         flash[:success] = "your selection was success"
+       redirect_to :back
+     else
+       flash[:danger] = "you can only like/dislike a reecipe once"
+       end 
+      end 
+   
+      
+    private
+    
             def reecipe_params
             params.require(:reecipe).permit(:name, :summary, :description, :picture)
             end
-
 end
+
+ 
+

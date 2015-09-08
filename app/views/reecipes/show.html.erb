@@ -17,11 +17,20 @@
                 <strong>
                     Steps:
                 </strong>
-            <p>
-            <%=  simple_format(@reecipe.description) %>
-            
             </p>
-        </div>
+            <%= simple_format(@reecipe.description) %>
+            <div class="pull-right">
+                <%= link_to like_reecipe_path(@reecipe, like: true), method: :post do %>
+                <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp <%= @reecipe.thumbs_up_total %>
+                <% end %> &nbsp&nbsp&nbsp&nbsp
+                <%= link_to like_reecipe_path(@reecipe, like: false), method: :post do %>
+                <i class="glyphicon glyphicon-thumbs-down"></i>&nbsp <%= @reecipe.thumbs_down_total %>
+                <% end %>&nbsp&nbsp&nbsp&nbsp
+                
+            </div>
+            
+                
+        </div>  
     </div>
-    </div>
-    <h5><%= link_to "Return Reecipe listing",reecipes_path, class: "btn btn-warning btn-small" %></h5>
+</div>
+    <h5><%= link_to "Return Reecipe listing", reecipes_path, class: "btn btn-warning btn-small" %></h5>
