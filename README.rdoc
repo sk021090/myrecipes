@@ -20,4 +20,14 @@
     - email must be present
     -email must be unique(since we will use this for login)
     -email must be valid
-    
+    -----------------------------------------------------------------------------
+    we need to do:
+    -add pwd to chef table so that chef can be authenticated and logged in
+    -use email as login credentials since email is unique here
+    -ability to register new chef to use the application
+    -ability to display chefs profile
+    -ability to list chef using the application
+    -ability for chefs to login and logout in application
+    -restrict action like create recipe and edit recipe and like feature to logged in chefs only
+    -restricting edit of recipes by chefs who created the recipes
+    -

@@ -1,11 +1,14 @@
 class ReecipesController < ApplicationController
+   before_action :set_reecipe, only: [:edit, :update, :show, :like]
+   before_action :require_user, except: [:show, :index]
+   before_action :require_same_user, only: [:edit, :update]
    
   def index
     @reecipes = Reecipe.paginate(page: params[:page], per_page: 4 )
   end
   
   def show
-   @reecipe = Reecipe.find(params[:id])
+   
   end 
   
   def new
@@ -14,7 +17,8 @@ class ReecipesController < ApplicationController
   
   def create 
          @reecipe = Reecipe.new(reecipe_params)
-         @reecipe.chef = Chef.find(2)
+         @reecipe.chef = current_user
+         
          
    if @reecipe.save
      flash[:success] = "your reecipe was created successfully!"
@@ -25,11 +29,11 @@ class ReecipesController < ApplicationController
   end
 
     def edit
-      @reecipe = Reecipe.find(params[:id])
+      
     end
     
     def update
-      @reecipe = Reecipe.find(params[:id])
+      
       if @reecipe.update(reecipe_params)
         flash[:success] = "your reecipe was updated successfully"
         redirect_to reecipe_path(@reecipe)
@@ -39,8 +43,8 @@ class ReecipesController < ApplicationController
     end 
 
       def like
-        @reecipe = Reecipe.find(params[:id])
-       Like.create(like: params[:like], chef: Chef.first, reecipe: @reecipe)
+      
+       Like.create(like: params[:like], chef: current_user, reecipe: @reecipe)
        if like.valid?
          flash[:success] = "your selection was success"
        redirect_to :back
@@ -55,6 +59,17 @@ class ReecipesController < ApplicationController
             def reecipe_params
             params.require(:reecipe).permit(:name, :summary, :description, :picture)
             end
+            
+          def set_reecipe
+           @reecipe = Reecipe.find(params[:id])
+          end
+         
+        def require_same_user
+           if current_user != @reecipe.chef
+            flash[:danger] = "you can't edit others profile"
+            redirect_to reecipes_path
+           end 
+        end
 end
 
  
